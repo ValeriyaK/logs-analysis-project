@@ -27,10 +27,16 @@ vagrant up
 vagrant ssh
 
 cd /vagrant
+```
+Download the data: https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip
 
+Move the newsdata.sql file into your vagrant directory, then run the following command:
+
+``` sh
 psql -d news -f newsdata.sql
 ```
-Move the contents of this repo into the /vagrant folder
+
+Move the contents of this repo into the /vagrant folder.
 
 Next, you need to create the views that are used to query the database.
 
