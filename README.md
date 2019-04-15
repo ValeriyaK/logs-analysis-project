@@ -32,7 +32,7 @@ psql -d news -f newsdata.sql
 ```
 Move the contents of this repo into the /vagrant folder
 
-Next, you need to create the views that are used to query the database. 
+Next, you need to create the views that are used to query the database.
 
 ### Create Views
 
@@ -55,4 +55,11 @@ CREATE VIEW errors AS SELECT date(time),
 round(100.0*sum(case log.status when '404 NOT FOUND' then 1 else 0 end)/count(log.status),2) 
 AS percent FROM log GROUP BY date(time) 
 ORDER BY percent DESC;
+```
+
+
+Once the views are created, run the following command to run the python program:
+
+``` sh
+python3 news-analysis.py
 ```
