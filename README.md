@@ -63,3 +63,12 @@ Once the views are created, run the following command to run the python program:
 ``` sh
 python3 news-analysis.py
 ```
+
+
+### Troubleshooting
+
+Python3 might not come with psycopg2, in which case, run the following command:
+
+``` sh
+pip3 install psycopg2-binary --user
+```
