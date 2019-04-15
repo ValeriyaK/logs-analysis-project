@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import psycopg2
 
 DBNAME = 'news'
@@ -16,7 +18,10 @@ error_query = """SELECT * from errors limit 1;"""
 
 
 def connect_to_database(query):
-    db = psycopg2.connect(database=DBNAME)
+    try:
+        db = psycopg2.connect(database=DBNAME)
+    except psycopg2.OperationalError as e:
+        print('Unable to connect!')
     c = db.cursor()
     c.execute(query)
     results = c.fetchall()
@@ -26,23 +31,23 @@ def connect_to_database(query):
 
 def get_top_articles():
     results = connect_to_database(article_query)
-    print(question_two)
-    for i in results:
-        print('\t' + str(i[0]) + ' - ' + str(i[1]) + ' views')
+    print(question_one)
+    for (title, count) in results:
+        print("    {} - {} views".format(title, count))
 
 
 def get_top_authors():
     results = connect_to_database(author_query)
     print(question_two)
-    for i in results:
-        print('\t' + str(i[0]) + ' - ' + str(i[1]) + ' views')
+    for (title, count) in results:
+        print("    {} - {} views".format(title, count))
 
 
 def get_day_with_most_errors():
     results = connect_to_database(error_query)
     print(question_three)
-    for i in results:
-        print('\t' + str(i[0]) + ' - ' + str(i[1]) + ' views')
+    for (day, percent) in results:
+        print("    {} - {}%".format(day, percent))
 
 
 if __name__ == '__main__':
