@@ -42,10 +42,12 @@ Next, you need to create the views that are used to query the database.
 
 ### Create Views
 
+Type `psql news` to connect to the db. 
+
 ``` sh
-CREATE VIEW article_views AS SELECT articles.title, 
-count(log.id) AS views FROM articles, log 
-WHERE log.path = concat('/article/', articles.slug) 
+CREATE VIEW article_views AS SELECT articles.title,
+count(log.id) AS views FROM articles, log
+WHERE log.path = concat('/article/', articles.slug)
 GROUP BY articles.title;
 ```
 
@@ -64,7 +66,7 @@ ORDER BY percent DESC;
 ```
 
 
-Once the views are created, run the following command to run the python program:
+Once the views are created, exit out of the db view, and cd into the logs-analysis-project. Run the following command to run the python program:
 
 ``` sh
 python3 news-analysis.py
